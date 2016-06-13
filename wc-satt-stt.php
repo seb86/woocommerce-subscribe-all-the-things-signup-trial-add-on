@@ -181,7 +181,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		/**
 		 * Subscriptions schemes admin metaboxes.
 		 *
-		 * @param  array $values
+		 * @param  array $defaults
 		 * @return void
 		 */
 		public static function add_default_subscription_schemes_content( $defaults ) {
@@ -247,7 +247,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 				'label'       => __( 'Subscription Trial Period', WCSATT_STT::TEXT_DOMAIN ),
 				'options'     => wcs_get_available_time_periods(),
 				// translators: placeholder is trial period validation message if passed an invalid value (e.g. "Trial period can not exceed 4 weeks")
-				'description' => sprintf( _x( 'An optional period of time to wait before charging the first recurring payment. Any sign up fee will still be charged at the outset of the subscription. %s', 'Trial period dropdown\'s description in pricing fields', WCSATT_STT::TEXT_DOMAIN ), self::get_trial_period_validation_message() ),
+				'description' => sprintf( _x( 'An optional period of time to wait before charging the first recurring payment. Any sign up fee will still be charged at the outset of the subscription. %s', 'Trial period dropdown\'s description in pricing fields', WCSATT_STT::TEXT_DOMAIN ), WC_Subscriptions_Admin::get_trial_period_validation_message() ),
 				'desc_tip'    => true,
 				'value'       => WC_Subscriptions_Product::get_trial_period( $post_id ), // Explicitly set value in to ensure backward compatibility
 				'name'        => 'wcsatt_schemes[' . $index . '][subscription_trial_period]',
@@ -329,6 +329,8 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 * @return string
 		 */
 		public function filter_suffix_price_html( $_product, $subscription_scheme, $product ) {
+			$subscription_string = '';
+
 			if ( isset( $_product->subscription_trial_length ) && 0 != $_product->subscription_trial_length ) {
 				$trial_string = wcs_get_subscription_trial_period_strings( $_product->subscription_trial_length, $_product->subscription_trial_period );
 				// translators: 1$: subscription string (e.g. "$15 on March 15th every 3 years for 6 years"), 2$: trial length (e.g.: "with 4 months free trial")
