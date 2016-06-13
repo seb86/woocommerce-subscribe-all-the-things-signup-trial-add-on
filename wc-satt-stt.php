@@ -13,7 +13,7 @@
  * Requires at least: 4.1
  * Tested up to: 4.5.2
  *
- * Copyright: © 2016 Sebastien Dumont
+ * Copyright: Â© 2016 Sebastien Dumont
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -29,7 +29,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		const REQ_WC_VERSION = '2.3.0';
 
 		/* Required WCSATT version */
-		const REQ_WCSATT_VERSION = '1.1.0';
+		const REQ_WCSATT_VERSION = '1.1.1';
 
 		/* Text domain. */
 		const TEXT_DOMAIN = 'wc-satt-stt';
@@ -103,7 +103,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			}
 
 			// Checks that WooCommerce Subscribe All the Things is running or is less than the required version.
-			if ( ! class_exists( 'WCS_ATT' ) || version_compare( WCS_ATT::VERSION, self::REQ_WCSATT_VERSION ) < 1.1.0 ) {
+			if ( ! class_exists( 'WCS_ATT' ) || version_compare( WCS_ATT::VERSION, self::REQ_WCSATT_VERSION ) < '1.1.1' ) {
 				add_action( 'admin_notices', array( $this, 'wcsatt_stt_admin_notice' ) );
 				return false;
 			}
@@ -286,8 +286,8 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 
 			// Format subscription trial period.
 			$trial_periods = apply_filters( 'wcsatt_stt_trial_periods', array( 'day', 'week', 'month', 'year' ) );
-			if ( isset( $posted_scheme[ 'subscription_trial_period' ] ) && in_array( $posted_scheme[ 'subscription_trial_period' ], $trial_periods ) {
-				$posted_scheme[ 'subscription_trial_period' ] = $posted_scheme[ 'subscription_trial_period' ] ;
+			if ( isset( $posted_scheme[ 'subscription_trial_period' ] ) && in_array( $posted_scheme[ 'subscription_trial_period' ], $trial_periods ) ) {
+				$posted_scheme[ 'subscription_trial_period' ] = $posted_scheme[ 'subscription_trial_period' ];
 			}
 
 			return $posted_scheme;
@@ -332,8 +332,10 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 				$subscription_string = sprintf( __( '%1$s with %2$s free trial', WCSATT_STT::TEXT_DOMAIN ), $subscription_string, $trial_string );
 			}
 
-			if ( is_numeric( $_product->subscription_sign_up_fee ) ) {
-				$sign_up_fee = wc_price( $_product->subscription_sign_up_fee );
+			$sign_up_fee = $_product->subscription_sign_up_fee;
+
+			if ( is_numeric( $sign_up_fee ) ) {
+				$sign_up_fee = wc_price( $sign_up_fee );
 			}
 
 			if ( isset( $_product->subscription_sign_up_fee ) && $_product->subscription_sign_up_fee > 0 ) {
@@ -341,7 +343,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 				$subscription_string = sprintf( __( '%1$s and a %2$s sign-up fee', WCSATT_STT::TEXT_DOMAIN ), $subscription_string, $sign_up_fee );
 			}
 
-			return $subscription_string
+			return $subscription_string;
 		}
 
 		/**
@@ -356,7 +358,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 
 			if ( $active_scheme && $cart_item['data']->is_converted_to_sub == 'yes' ) {
 
-				$sign_up_fee = $this->get_item_signup_fee( $cart_item[ 'product_id' ], $active_scheme );
+				$sign_up_fee  = $this->get_item_signup_fee( $cart_item[ 'product_id' ], $active_scheme );
 				$trial_length = $this->get_item_trial_length( $cart_item[ 'product_id' ], $active_scheme );
 				$trial_period = $this->get_item_trial_period( $cart_item[ 'product_id' ], $active_scheme );
 
