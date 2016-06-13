@@ -227,7 +227,8 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 					'step' => 'any',
 					'min'  => '0',
 				),
-				'name'        => 'wcsatt_schemes[' . $index . '][subscription_sign_up_fee]'
+				'name'        => 'wcsatt_schemes[' . $index . '][subscription_sign_up_fee]',
+				'value'       => $subscription_sign_up_fee
 			) );
 
 			// Trial Length
@@ -235,7 +236,8 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 				'id'          => '_subscription_trial_length',
 				'class'       => 'wc_input_subscription_trial_length',
 				'label'       => __( 'Free Trial', WCSATT_STT::TEXT_DOMAIN ),
-				'name'        => 'wcsatt_schemes[' . $index . '][subscription_trial_length]'
+				'name'        => 'wcsatt_schemes[' . $index . '][subscription_trial_length]',
+				'value'       => $subscription_trial_length
 			) );
 
 			// Trial Period
@@ -248,7 +250,8 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 				'description' => sprintf( _x( 'An optional period of time to wait before charging the first recurring payment. Any sign up fee will still be charged at the outset of the subscription. %s', 'Trial period dropdown\'s description in pricing fields', WCSATT_STT::TEXT_DOMAIN ), self::get_trial_period_validation_message() ),
 				'desc_tip'    => true,
 				'value'       => WC_Subscriptions_Product::get_trial_period( $post_id ), // Explicitly set value in to ensure backward compatibility
-				'name'        => 'wcsatt_schemes[' . $index . '][subscription_trial_period]'
+				'name'        => 'wcsatt_schemes[' . $index . '][subscription_trial_period]',
+				'value'       => $subscription_trial_period
 		) );
 		} // END wcsatt_stt_fields()
 
