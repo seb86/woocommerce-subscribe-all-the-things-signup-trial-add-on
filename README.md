@@ -8,7 +8,7 @@ The goal of the extension is to provide additional subscription options, allowin
 
 This works with all supported product types in WooCommerce Subscribe to All the Things.
 
-![Simple Product with Subscription Options with a sign up fee and trial](https://cloud.githubusercontent.com/assets/235523/11986954/8a6cd3d2-a98b-11e5-9bf8-77f2c31480b8.png)
+![Simple Product with Subscription Options with a Sign Up fee and Trial Period](https://cldup.com/BFVJIHIkgn.png)
 
 **Example screenshot of a Simple Product with Subscription Options with a sign up fee and trial as displayed to the customer in a store.**
 
@@ -20,11 +20,11 @@ This works with all supported product types in WooCommerce Subscribe to All the 
 
 In order to use the extension, you will need:
 
-* WooCommerce 2.3 or newer
-* WooCommerce Subscriptions v2.0 or newer
-* WooCommerce Subscribe to All the Things v1.1.1 or newer
-* A staging or test site, I do not recommend using this on live sites yet
-* A sense of adventure as the codebase is still pre-beta
+* WooCommerce 2.3 or newer.
+* WooCommerce Subscriptions v2.0 or newer.
+* WooCommerce Subscribe to All the Things v1.1.1 or newer.
+* A staging or test site, I do not recommend using this on live sites yet.
+* A sense of adventure as the codebase is still pre-beta.
 
 ### Installation
 
