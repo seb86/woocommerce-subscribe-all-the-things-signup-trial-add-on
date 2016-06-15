@@ -97,13 +97,13 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			global $woocommerce;
 
 			// Check that the required WooCommerce is running.
-			if ( version_compare( $woocommerce->version, self::REQ_WC_VERSION ) < 0 ) {
+			if ( version_compare( $woocommerce->version, self::REQ_WC_VERSION, '<' ) ) {
 				add_action( 'admin_notices', array( $this, 'wcsatt_stt_wc_admin_notice' ) );
 				return false;
 			}
 
 			// Checks that WooCommerce Subscribe All the Things is running or is less than the required version.
-			if ( ! class_exists( 'WCS_ATT' ) || version_compare( WCS_ATT::VERSION, self::REQ_WCSATT_VERSION ) < '1.1.1' ) {
+			if ( ! class_exists( 'WCS_ATT' ) || version_compare( WCS_ATT::VERSION, self::REQ_WCSATT_VERSION, '<' ) ) {
 				add_action( 'admin_notices', array( $this, 'wcsatt_stt_admin_notice' ) );
 				return false;
 			}
@@ -204,8 +204,8 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 */
 		public function wcsatt_stt_fields( $index, $scheme_data, $post_id ) {
 			if ( ! empty( $scheme_data ) ) {
-				$subscription_sign_up_fee = ! empty( $scheme_data[ 'subscription_sign_up_fee' ] ) ? $scheme_data[ 'subscription_sign_up_fee' ] : 'inherit';
-				$subscription_trial_length = isset( $scheme_data[ 'subscription_trial_length' ] ) ? $scheme_data[ 'subscription_trial_length' ] : '';
+				$subscription_sign_up_fee = ! empty( $scheme_data[ 'subscription_sign_up_fee' ] ) ? $scheme_data[ 'subscription_sign_up_fee' ] : '';
+				$subscription_trial_length = isset( $scheme_data[ 'subscription_trial_length' ] ) ? $scheme_data[ 'subscription_trial_length' ] : 0;
 				$subscription_trial_period = isset( $scheme_data[ 'subscription_trial_period' ] ) ? $scheme_data[ 'subscription_trial_period' ] : '';
 			} else {
 				$subscription_sign_up_fee = '';
@@ -282,15 +282,19 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 				$posted_scheme[ 'subscription_sign_up_fee' ] = ( $posted_scheme[ 'subscription_sign_up_fee' ] === '' ) ? '' : wc_format_decimal( $posted_scheme[ 'subscription_sign_up_fee' ] );
 			}
 
+			// Make sure trial period is within allowable range.
+			$subscription_ranges = wcs_get_subscription_ranges();
+			$max_trial_length = count( $subscription_ranges[ $posted_scheme[ 'subscription_trial_period' ] ] ) - 1;
+
 			// Format subscription trial length.
-			if ( isset( $posted_scheme[ 'subscription_trial_length' ] ) ) {
-				$posted_scheme[ 'subscription_trial_length' ] = ( $posted_scheme[ 'subscription_trial_length' ] === '' ) ? '' : wc_format_decimal( $posted_scheme[ 'subscription_trial_length' ] );
+			if ( isset( $posted_scheme[ 'subscription_trial_length' ] ) && $posted_scheme[ 'subscription_trial_length' ] > $max_trial_length ) {
+				$posted_scheme[ 'subscription_trial_length' ] = ( $posted_scheme[ 'subscription_trial_length' ] === '' ) ? '' : absint( $posted_scheme[ 'subscription_trial_length' ] );
 			}
 
 			// Format subscription trial period.
 			$trial_periods = apply_filters( 'wcsatt_stt_trial_periods', array( 'day', 'week', 'month', 'year' ) );
 			if ( isset( $posted_scheme[ 'subscription_trial_period' ] ) && in_array( $posted_scheme[ 'subscription_trial_period' ], $trial_periods ) ) {
-				$posted_scheme[ 'subscription_trial_period' ] = $posted_scheme[ 'subscription_trial_period' ];
+				$posted_scheme[ 'subscription_trial_period' ] = trim( $posted_scheme[ 'subscription_trial_period' ] );
 			}
 
 			return $posted_scheme;
