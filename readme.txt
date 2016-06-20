@@ -1,7 +1,7 @@
-=== WooCommerce Subscribe to All the Things - Sign up and Trial Addon ===
+=== WooCommerce Subscribe to All the Things - Sign up and Trial Add-on ===
 
 Contributors: sebd86
-Tags: woocommerce, subscriptions, subscribe, order, cart, product, convert, product type, variable, variations, bundle, composite, mix, match, extension
+Tags: woocommerce, subscriptions, subscribe, order, cart, product, convert, product type, variable, variations, bundle, composite, mix, match, extension, add-on, signup, trial
 Requires at least: 3.8
 Tested up to: 4.5.2
 Stable tag: 1.0.0
@@ -10,7 +10,7 @@ WC tested up to: 2.5.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Adds sign up and trial options for the subscription options to existing WooCommerce products using the WooCommerce Subscribe to All the Things extension.
+Adds the sign up and trial fields for the subscription options to existing WooCommerce products using the WooCommerce Subscribe to All the Things extension.
 
 == Description ==
 

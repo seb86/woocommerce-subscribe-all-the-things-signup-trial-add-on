@@ -1,18 +1,16 @@
-# WooCommerce Subscribe to All the Things - Sign up and Trial Addon
+# WooCommerce Subscribe to All the Things - Sign up and Trial Add-on
 
 This is an addon extension for [WooCommerce Subscribe to All the Things](https://github.com/Prospress/woocommerce-subscribe-all-the-things) currently in development.
 
-> Please note: The code hosted here so far is incomplete and untested.
+> Please note: The code hosted here so far is incomplete.
 
 The goal of the extension is to provide additional subscription options, allowing you to add a sign up fee and/or a free trial to the subscription options.
 
 This works with all supported product types in WooCommerce Subscribe to All the Things.
 
-![Simple Product with Subscription Options with a Sign Up fee and Trial Period](https://cldup.com/BFVJIHIkgn.png)
+![Simple Product, Forced Sub with Subscription Options and a Trial Period](https://cldup.com/7iwW_UBfpn.png)
 
-**Example screenshot of a Simple Product with Subscription Options with a sign up fee and trial as displayed to the customer in a store.**
-
-> To Do: Screenshot needs to be replaced.
+**Example screenshot of a Simple Product with Subscription Options and a Trial Period.**
 
 # Guide
 
@@ -42,7 +40,7 @@ To offer this to your customers:
 3. Then, if you want to add a sign up fee, enter the amount you wish to charge for that option.
 4. If you want to add a trial, enter the trial length followed by selecting a trial period.
 
-![Example Custom Prices for Subscription Options on a Simple Product](https://cldup.com/a_dlYS0yFr.png)
+![Example Subscription Options with the Sign Up and Free Trial Fields on a Simple Product](https://cldup.com/a_dlYS0yFr.png)
 
 > To Do: Screenshot needs to be replaced.
 
