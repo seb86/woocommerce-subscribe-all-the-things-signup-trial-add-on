@@ -115,7 +115,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 * @return void
 		 */
 		public function wcsatt_stt_wc_admin_notice() {
-			echo '<div class="error"><p>' . sprintf( __( '%1$s requires at least %2$s v%3$s in order to function. Please upgrade %2$s.', 'wc-satt-stt' ), 'Sign up and Trial Options for WCSATT', 'WooCommerce', self::REQ_WC_VERSION ) . '</p></div>';
+			echo '<div class="error"><p>' . sprintf( __( '%1$s requires at least %2$s v%3$s in order to function. Please upgrade %2$s.', 'wc-satt-stt' ), 'Sign up and Trial Options Add-on for WCSATT', 'WooCommerce', self::REQ_WC_VERSION ) . '</p></div>';
 		} // END wcsatt_stt_wc_admin_notice()
 
 		/**
@@ -124,7 +124,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 * @return void
 		 */
 		public function wcsatt_stt_admin_notice() {
-			echo '<div class="error"><p>' . sprintf( __( '%1$s requires at least %2$s v%3$s in order to function. Please upgrade %2$s.', 'wc-satt-stt' ), 'Sign up and Trial Options Addon', 'WooCommerce Subscribe to All the Things', self::REQ_WCSATT_VERSION ) . '</p></div>';
+			echo '<div class="error"><p>' . sprintf( __( '%1$s requires at least %2$s v%3$s in order to function. Please upgrade %2$s.', 'wc-satt-stt' ), 'Sign up and Trial Options Add-on', 'WooCommerce Subscribe to All the Things', self::REQ_WCSATT_VERSION ) . '</p></div>';
 		} // END wcsatt_stt_admin_notice()
 
 		/**
@@ -139,8 +139,14 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			// Adds the sign up fee and trial data to the price html on the 'wcsatt_overridden_subscription_prices_product' filter.
 			add_filter( 'wcsatt_overridden_subscription_prices_product', array( $this, 'add_sub_scheme_data_price_html' ), 10, 3 );
 
+			// Adds the extra subscription scheme data to the product object.
+			add_filter( 'wcsatt_sub_product_scheme_option', array( $this, 'sub_product_scheme_option' ), 10, 2 );
+
+			// Filters the price string to include the sign up fee and/or trial to pass per scheme option.
+			add_filter( 'wcsatt_get_single_product_price_string', array( $this, 'get_price_string' ), 10, 2 );
+
 			// Filters the suffix price html on the 'wcsatt_suffix_price_html' filter.
-			add_filter( 'wcsatt_suffix_price_html', array( $this, 'filter_suffix_price_html' ), 10, 1 );
+			//add_filter( 'wcsatt_suffix_price_html', array( $this, 'filter_suffix_price_html' ), 10, 1 );
 
 			// Overrides the price of the subscription for sign up fee and/or trial on the 'woocommerce_add_cart_item' filter.
 			add_filter( 'woocommerce_add_cart_item', array( $this, 'add_cart_item' ), 15, 1 );
@@ -179,15 +185,15 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		} // END plugin_meta_links()
 
 		/**
-		 * Subscriptions schemes admin metaboxes.
+		 * Adds the default values for subscriptions schemes content.
 		 *
 		 * @param  array $defaults
 		 * @return void
 		 */
 		public static function add_default_subscription_schemes_content( $defaults ) {
 			$new_defaults = array(
-				'subscription_sign_up_fee' => '',
-				'subscription_trial_length' => 0,
+				'subscription_sign_up_fee'  => '',
+				'subscription_trial_length' => '',
 				'subscription_trial_period' => ''
 			);
 
@@ -322,7 +328,49 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			}
 
 			return $_product;
-		}
+		} // END add_sub_scheme_data_price_html()
+
+		/**
+		 * Adds the extra subscription scheme data to the product object.
+		 * This allows the subscription price to change the initial and
+		 * recurring subscriptions.
+		 *
+		 * @param  object $_cloned
+		 * @param  array  $subscription_scheme
+		 * @return object
+		 */
+		public function sub_product_scheme_option( $_cloned, $subscription_scheme ) {
+			if ( isset( $subscription_scheme[ 'subscription_sign_up_fee' ] ) && $subscription_scheme[ 'subscription_sign_up_fee' ] > 0 ) {
+				$_cloned->subscription_sign_up_fee = $subscription_scheme[ 'subscription_sign_up_fee' ];
+			}
+
+			if ( isset( $subscription_scheme[ 'subscription_trial_length' ] ) && 0 != $subscription_scheme[ 'subscription_trial_length' ] ) {
+				$_cloned->subscription_trial_length = $subscription_scheme[ 'subscription_trial_length' ];
+				$_cloned->subscription_trial_period = $subscription_scheme[ 'subscription_trial_period' ];
+			}
+
+			return $_cloned;
+		} // END sub_product_scheme_option()
+
+		/**
+		 * Filters the price string to include the sign up fee and/or trial 
+		 * to pass per subscription scheme option.
+		 *
+		 * @param  array $prices
+		 * @param  array $subscription_scheme
+		 * @return array
+		 */
+		public function get_price_string( $prices, $subscription_scheme ) {
+			if ( isset( $subscription_scheme[ 'subscription_sign_up_fee' ] ) && $subscription_scheme[ 'subscription_sign_up_fee' ] > 0 ) {
+				$prices[ 'sign_up_fee' ] = true;
+			}
+
+			if ( isset( $subscription_scheme[ 'subscription_trial_length' ] ) && 0 != $subscription_scheme[ 'subscription_trial_length' ] ) {
+				$prices[ 'trial_length' ] = true;
+			}
+
+			return $prices;
+		} // END get_price_string()
 
 		/**
 		 * Filter the suffix price string.
@@ -332,7 +380,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 * @param WC_Product $product
 		 * @return string
 		 */
-		public function filter_suffix_price_html( $_product, $subscription_scheme, $product ) {
+		/*public function filter_suffix_price_html( $_product, $subscription_scheme, $product ) {
 			$subscription_string = '';
 
 			if ( isset( $_product->subscription_trial_length ) && 0 != $_product->subscription_trial_length ) {
@@ -353,7 +401,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			}
 
 			return $subscription_string;
-		}
+		}*/
 
 		/**
 		 * Converts a cart item if it's a subscription with 
