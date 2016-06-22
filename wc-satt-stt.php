@@ -139,17 +139,20 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			// Adds the sign up fee and trial data to the price html on the 'wcsatt_overridden_subscription_prices_product' filter.
 			add_filter( 'wcsatt_overridden_subscription_prices_product', array( $this, 'add_sub_scheme_data_price_html' ), 10, 3 );
 
-			// Adds the extra subscription scheme data to the product object.
+			// Adds the extra subscription scheme data to the product object on the 'wcsatt_sub_product_scheme_option' filter.
 			add_filter( 'wcsatt_sub_product_scheme_option', array( $this, 'sub_product_scheme_option' ), 10, 2 );
 
-			// Filters the price string to include the sign up fee and/or trial to pass per scheme option.
+			// Filters the price string to include the sign up fee and/or trial to pass per scheme option on the 'wcsatt_get_single_product_price_string' filter.
 			add_filter( 'wcsatt_get_single_product_price_string', array( $this, 'get_price_string' ), 10, 2 );
 
 			// Filters the suffix price html on the 'wcsatt_suffix_price_html' filter.
 			//add_filter( 'wcsatt_suffix_price_html', array( $this, 'filter_suffix_price_html' ), 10, 1 );
 
-			// Overrides the price of the subscription for sign up fee and/or trial on the 'woocommerce_add_cart_item' filter.
-			add_filter( 'woocommerce_add_cart_item', array( $this, 'add_cart_item' ), 15, 1 );
+			// Adds the sign-up and/or trial data to the subscription scheme prices on the 'wcsatt_subscription_scheme_prices' filter.
+			add_filter( 'wcsatt_subscription_scheme_prices', array( $this, 'add_subscription_scheme_prices' ), 10, 2 );
+
+			// Overrides the price of the subscription for sign up fee and/or trial on the 'wcsatt_cart_item' filter.
+			add_filter( 'wcsatt_cart_item', array( $this, 'update_cart_item_sub_data' ), 10, 1 );
 		} // END init_plugin()
 
 		/**
@@ -404,44 +407,70 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		}*/
 
 		/**
-		 * Converts a cart item if it's a subscription with 
-		 * a trial subscription or/and has a sign-up fee.
+		 * Adds the sign-up and/or trial data to the subscription scheme prices.
+		 *
+		 * @param  array $prices
+		 * @param  array $subscription_scheme
+		 * @return array
+		 */
+		public function add_subscription_scheme_prices( $prices, $subscription_scheme ) {
+			if ( isset( $subscription_scheme[ 'subscription_sign_up_fee' ] ) ) {
+				$prices[ 'sign_up_fee' ] = $subscription_scheme[ 'subscription_sign_up_fee' ];
+			}
+
+			if ( isset( $subscription_scheme[ 'subscription_trial_length' ] ) ) {
+				$prices[ 'trial_length' ] = $subscription_scheme[ 'subscription_trial_length' ];
+			}
+
+			if ( isset( $subscription_scheme[ 'subscription_trial_period' ] ) ) {
+				$prices[ 'trial_period' ] = $subscription_scheme[ 'subscription_trial_period' ];
+			}
+
+			return $prices;
+		} // END add_subscription_scheme_prices()
+
+		/**
+		 * Updates the cart item data for a subscription product that
+		 * has a sign-up fee and/or trial period applied.
 		 *
 		 * @param  array $cart_item
 		 * @return array
 		 */
-		public function add_cart_item( $cart_item ) {
+		public function update_cart_item_sub_data( $cart_item ) {
 			$active_scheme = WCS_ATT_Schemes::get_active_subscription_scheme( $cart_item );
 
-			if ( $active_scheme && $cart_item['data']->is_converted_to_sub == 'yes' ) {
+			$subscription_prices = WCS_ATT_Scheme_Prices::get_active_subscription_scheme_prices( $cart_item, $active_scheme );
 
-				$sign_up_fee  = $this->get_item_signup_fee( $cart_item[ 'product_id' ], $active_scheme );
-				$trial_length = $this->get_item_trial_length( $cart_item[ 'product_id' ], $active_scheme );
-				$trial_period = $this->get_item_trial_period( $cart_item[ 'product_id' ], $active_scheme );
+			if ( $active_scheme && $cart_item['data']->is_converted_to_sub == 'yes' ) {
 
 				// Subscription Price
 				$price = $cart_item['data']->subscription_price;
 
 				// Is there a sign up fee?
-				$sign_up_fee = ! empty( $sign_up_fee ) ? $sign_up_fee : '';
+				$sign_up_fee = isset( $subscription_prices['sign_up_fee'] ) ? $subscription_prices['sign_up_fee'] : '';
+
+				// Put them both together.
+				$new_price = $price + $sign_up_fee;
+
+				if ( $sign_up_fee > 0 ) {
+					$cart_item['data']->initial_amount = $new_price;
+					$cart_item['data']->subscription_sign_up_fee = $sign_up_fee;
+				}
+
+				$trial_length = isset( $subscription_prices['trial_length'] ) ? $subscription_prices['trial_length'] : 0;
+				$trial_period = isset( $subscription_prices['trial_period'] ) ? $subscription_prices['trial_period'] : '';
 
 				// If a trial length is more than zero then re-adjust the price.
 				if ( $trial_length > 0 ) {
-					$cart_item['data']->price = $sign_up_fee;
-					$cart_item['data']->subscription_price = $sign_up_fee;
-					$cart_item['data']->sale_price = $sign_up_fee;
-					$cart_item['data']->regular_price = $sign_up_fee;
-					$cart_item['data']->initial_amount = $sign_up_fee;
-					$cart_item['data']->subscription_sign_up_fee = $sign_up_fee;
+
+					/*$cart_item['data']->price = $new_price;
+					$cart_item['data']->subscription_price = $new_price;
+					$cart_item['data']->sale_price = $new_price;
+					$cart_item['data']->regular_price = $new_price;*/
+
 					$cart_item['data']->subscription_trial_length = $trial_length;
 					$cart_item['data']->subscription_trial_period = $trial_period;
 				} else {
-					$cart_item['data']->price = $price + $sign_up_fee;
-					$cart_item['data']->subscription_price = $price + $sign_up_fee;
-					$cart_item['data']->sale_price = $price + $sign_up_fee;
-					$cart_item['data']->regular_price = $price + $sign_up_fee;
-					$cart_item['data']->initial_amount = $price + $sign_up_fee;
-					$cart_item['data']->subscription_sign_up_fee = $sign_up_fee;
 					$cart_item['data']->subscription_trial_length = 0;
 					$cart_item['data']->subscription_trial_period = '';
 				}
@@ -449,49 +478,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			}
 
 			return $cart_item;
-		} // END add_cart_item()
-
-		/**
-		 * Get the item signup fee from the subscription scheme.
-		 *
-		 * @param int  $product_id
-		 * @param int  $scheme_id
-		 * @return int
-		 */
-		public function get_item_signup_fee( $product_id, $scheme_id ) {
-			$product_schemes = get_post_meta( $product_id, '_wcsatt_schemes', true );
-			$thescheme = $product_schemes[$scheme_id];
-
-			return $thescheme['subscription_sign_up_fee'];
-		} // END get_item_signup_fee()
-
-		/**
-		 * Get the item trial length from the subscription scheme.
-		 *
-		 * @param int  $product_id
-		 * @param int  $scheme_id
-		 * @return int
-		 */
-		public function get_item_trial_length( $product_id, $scheme_id ) {
-			$product_schemes = get_post_meta( $product_id, '_wcsatt_schemes', true );
-			$thescheme = $product_schemes[$scheme_id];
-
-			return $thescheme['subscription_trial_length'];
-		} // END get_item_trial_length()
-
-		/**
-		 * Get the item trial period from the subscription scheme.
-		 *
-		 * @param  int    $product_id
-		 * @param  int    $scheme_id
-		 * @return string
-		 */
-		public function get_item_trial_period( $product_id, $scheme_id ) {
-			$product_schemes = get_post_meta( $product_id, '_wcsatt_schemes', true );
-			$thescheme = $product_schemes[$scheme_id];
-
-			return $thescheme['subscription_trial_period'];
-		} // END get_item_trial_period()
+		} // END update_cart_item_sub_data()
 
 	} // END class
 
