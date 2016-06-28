@@ -3,7 +3,7 @@
 Contributors: sebd86
 Tags: woocommerce, subscriptions, subscribe, order, cart, product, convert, product type, variable, variations, bundle, composite, mix, match, extension, add-on, signup, trial
 Requires at least: 3.8
-Tested up to: 4.5.2
+Tested up to: 4.5.3
 Stable tag: 1.0.0
 WC requires at least: 2.3
 WC tested up to: 2.5.5
