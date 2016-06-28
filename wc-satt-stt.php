@@ -145,8 +145,14 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			// Filters the price string to include the sign up fee and/or trial to pass per scheme option on the 'wcsatt_get_single_product_price_string' filter.
 			add_filter( 'wcsatt_get_single_product_price_string', array( $this, 'get_price_string' ), 10, 2 );
 
+			// Filters the lowest price string to include the sign up fee on the 'wcsatt_get_single_product_lowest_price_string' filter.
+			add_filter( 'wcsatt_get_single_product_lowest_price_string', array( $this, 'get_lowest_price_string' ), 10, 2 );
+
 			// Filters the suffix price html on the 'wcsatt_suffix_price_html' filter.
 			//add_filter( 'wcsatt_suffix_price_html', array( $this, 'filter_suffix_price_html' ), 10, 1 );
+
+			// Filters the lowest price subscription scheme data on the 'wcsatt_get_lowest_price_sub_scheme_data' filter.
+			add_filter( 'wcsatt_get_lowest_price_sub_scheme_data', array( $this, 'get_lowest_price_sub_scheme_data' ), 10, 2 );
 
 			// Adds the sign-up and/or trial data to the subscription scheme prices on the 'wcsatt_subscription_scheme_prices' filter.
 			add_filter( 'wcsatt_subscription_scheme_prices', array( $this, 'add_subscription_scheme_prices' ), 10, 2 );
@@ -376,6 +382,22 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		} // END get_price_string()
 
 		/**
+		 * Filters the price string to include the sign up 
+		 * fee on the lowest subscription scheme.
+		 *
+		 * @param  array $prices
+		 * @param  array $lowest_subscription_scheme
+		 * @return array
+		 */
+		public function get_lowest_price_string( $prices,  $lowest_subscription_scheme ) {
+			if ( isset( $lowest_subscription_scheme[ 'sign_up_fee' ] ) && $lowest_subscription_scheme[ 'sign_up_fee' ] > 0 ) {
+				$prices[ 'sign_up_fee' ] = $lowest_subscription_scheme[ 'sign_up_fee' ];
+			}
+
+			return $prices;
+		} // END get_lowest_price_string()
+
+		/**
 		 * Filter the suffix price string.
 		 *
 		 * @param object     $_product
@@ -405,6 +427,21 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 
 			return $subscription_string;
 		}*/
+
+		/**
+		 * Adds the sign-up fee to the lowest subscription scheme option.
+		 *
+		 * @param array $data
+		 * @param array $lowest_scheme
+		 * @return array
+		 */
+		public function get_lowest_price_sub_scheme_data( $data, $lowest_scheme ) {
+			if ( isset( $lowest_scheme['subscription_sign_up_fee'] ) && $lowest_scheme['subscription_sign_up_fee'] > 0 ) {
+				$data['sign_up_fee'] = $lowest_scheme['subscription_sign_up_fee'];
+			}
+
+			return $data;
+		} // END get_lowest_price_sub_scheme_data()
 
 		/**
 		 * Adds the sign-up and/or trial data to the subscription scheme prices.
