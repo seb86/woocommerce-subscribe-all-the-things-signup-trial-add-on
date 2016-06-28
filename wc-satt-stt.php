@@ -371,7 +371,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 */
 		public function get_price_string( $prices, $subscription_scheme ) {
 			if ( isset( $subscription_scheme[ 'subscription_sign_up_fee' ] ) && $subscription_scheme[ 'subscription_sign_up_fee' ] > 0 ) {
-				$prices[ 'sign_up_fee' ] = true;
+				$prices[ 'sign_up_fee' ] = $subscription_scheme[ 'subscription_sign_up_fee' ];
 			}
 
 			if ( isset( $subscription_scheme[ 'subscription_trial_length' ] ) && 0 != $subscription_scheme[ 'subscription_trial_length' ] ) {
@@ -426,7 +426,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			}
 
 			return $subscription_string;
-		}*/
+		} // END filter_suffix_price_html()*/
 
 		/**
 		 * Adds the sign-up fee to the lowest subscription scheme option.
