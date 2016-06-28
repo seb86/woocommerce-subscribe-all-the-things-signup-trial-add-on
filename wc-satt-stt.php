@@ -148,9 +148,6 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			// Filters the lowest price string to include the sign up fee on the 'wcsatt_get_single_product_lowest_price_string' filter.
 			add_filter( 'wcsatt_get_single_product_lowest_price_string', array( $this, 'get_lowest_price_string' ), 10, 2 );
 
-			// Filters the suffix price html on the 'wcsatt_suffix_price_html' filter.
-			//add_filter( 'wcsatt_suffix_price_html', array( $this, 'filter_suffix_price_html' ), 10, 1 );
-
 			// Filters the lowest price subscription scheme data on the 'wcsatt_get_lowest_price_sub_scheme_data' filter.
 			add_filter( 'wcsatt_get_lowest_price_sub_scheme_data', array( $this, 'get_lowest_price_sub_scheme_data' ), 10, 2 );
 
@@ -167,9 +164,6 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 * @return void
 		 */
 		public function admin_wcsatt_stt_product_meta() {
-			// Subscription scheme options displayed on the 'wcsatt_subscription_scheme_content' action.
-			//add_action( 'wcsatt_subscription_scheme_content', array( $this, 'wcsatt_stt_fields' ), 15, 3 );
-
 			// Subscription scheme options displayed on the 'wcsatt_subscription_scheme_product_content' action.
 			add_action( 'wcsatt_subscription_scheme_product_content', array( $this, 'wcsatt_stt_fields' ), 15, 3 );
 
@@ -396,37 +390,6 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 
 			return $prices;
 		} // END get_lowest_price_string()
-
-		/**
-		 * Filter the suffix price string.
-		 *
-		 * @param object     $_product
-		 * @param array      $subscription_scheme
-		 * @param WC_Product $product
-		 * @return string
-		 */
-		/*public function filter_suffix_price_html( $_product, $subscription_scheme, $product ) {
-			$subscription_string = '';
-
-			if ( isset( $_product->subscription_trial_length ) && 0 != $_product->subscription_trial_length ) {
-				$trial_string = wcs_get_subscription_trial_period_strings( $_product->subscription_trial_length, $_product->subscription_trial_period );
-				// translators: 1$: subscription string (e.g. "$15 on March 15th every 3 years for 6 years"), 2$: trial length (e.g.: "with 4 months free trial")
-				$subscription_string = sprintf( __( '%1$s with %2$s free trial', WCSATT_STT::TEXT_DOMAIN ), $subscription_string, $trial_string );
-			}
-
-			$sign_up_fee = $_product->subscription_sign_up_fee;
-
-			if ( is_numeric( $sign_up_fee ) ) {
-				$sign_up_fee = wc_price( $sign_up_fee );
-			}
-
-			if ( isset( $_product->subscription_sign_up_fee ) && $_product->subscription_sign_up_fee > 0 ) {
-				// translators: 1$: subscription string (e.g. "$15 on March 15th every 3 years for 6 years with 2 months free trial"), 2$: signup fee price (e.g. "and a $30 sign-up fee")
-				$subscription_string = sprintf( __( '%1$s and a %2$s sign-up fee', WCSATT_STT::TEXT_DOMAIN ), $subscription_string, $sign_up_fee );
-			}
-
-			return $subscription_string;
-		} // END filter_suffix_price_html()*/
 
 		/**
 		 * Adds the sign-up fee to the lowest subscription scheme option.
