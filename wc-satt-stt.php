@@ -11,7 +11,7 @@
  * Domain Path: /languages/
  *
  * Requires at least: 4.1
- * Tested up to: 4.5.2
+ * Tested up to: 4.5.3
  *
  * Copyright: © 2016 Sebastien Dumont
  * License: GNU General Public License v3.0
