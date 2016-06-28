@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WooCommerce Subscribe to All the Things - Sign up and "
 "Trial Addon\n"
-"POT-Creation-Date: 2016-06-13 09:33+0200\n"
+"POT-Creation-Date: 2016-06-22 17:55+0200\n"
 "PO-Revision-Date: 2016-06-13 06:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,53 +31,43 @@ msgid ""
 "%1$s requires at least %2$s v%3$s in order to function. Please upgrade %2$s."
 msgstr ""
 
-#: wc-satt-stt.php:175
+#: wc-satt-stt.php:184
 #, php-format
 msgid "By %s"
 msgstr ""
 
-#: wc-satt-stt.php:221
+#: wc-satt-stt.php:230
 #, php-format
 msgid "Sign-up Fee (%s)"
 msgstr ""
 
-#: wc-satt-stt.php:222
+#: wc-satt-stt.php:231
 msgctxt "example price"
 msgid "e.g. 9.90"
 msgstr ""
 
-#: wc-satt-stt.php:223
+#: wc-satt-stt.php:232
 msgid ""
 "Optionally include an amount to be charged at the outset of the "
 "subscription. The sign-up fee will be charged immediately, even if the "
 "product has a free trial or the payment dates are synced."
 msgstr ""
 
-#: wc-satt-stt.php:237
+#: wc-satt-stt.php:247
 msgid "Free Trial"
 msgstr ""
 
-#: wc-satt-stt.php:245
+#: wc-satt-stt.php:256
 msgid "Subscription Trial Period"
 msgstr ""
 
-#: wc-satt-stt.php:248
+#: wc-satt-stt.php:259
 #, php-format
 msgctxt "Trial period dropdown's description in pricing fields"
 msgid ""
 "An optional period of time to wait before charging the first recurring "
 "payment. Any sign up fee will still be charged at the outset of the "
 "subscription. %s"
-msgstr ""
-
-#: wc-satt-stt.php:332
-#, php-format
-msgid "%1$s with %2$s free trial"
-msgstr ""
-
-#: wc-satt-stt.php:341
-#, php-format
-msgid "%1$s and a %2$s sign-up fee"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
