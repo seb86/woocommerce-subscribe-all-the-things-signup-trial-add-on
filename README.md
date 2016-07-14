@@ -49,3 +49,10 @@ Enjoy! :)
 #### License
 
 This plugin is released under [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
+
+#### Credits
+[Prospress](http://prospress.com/) and [SomewhereWarm](http://www.somewherewarm.net/) are the developers of the [WooCommerce Subscribe to All the Things](https://github.com/Prospress/woocommerce-subscribe-all-the-things) mini-extension.
+
+This extension is developed and maintained by [me](https://sebastiendumont.com).
+
+This project was backed by [Subscription Group Limited](http://www.subscriptiongroup.co.uk).
