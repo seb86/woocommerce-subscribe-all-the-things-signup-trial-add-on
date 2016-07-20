@@ -139,11 +139,11 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 			// Adds the sign up fee and trial data to the price html on the 'wcsatt_overridden_subscription_prices_product' filter.
 			add_filter( 'wcsatt_overridden_subscription_prices_product', array( $this, 'add_sub_scheme_data_price_html' ), 10, 3 );
 
-			// Adds the extra subscription scheme data to the product object on the 'wcsatt_sub_product_scheme_option' filter.
-			add_filter( 'wcsatt_sub_product_scheme_option', array( $this, 'sub_product_scheme_option' ), 10, 2 );
+			// Adds the extra subscription scheme data to the product object on the 'wcsatt_converted_product_for_scheme_option' filter.
+			add_filter( 'wcsatt_converted_product_for_scheme_option', array( $this, 'sub_product_scheme_option' ), 10, 2 );
 
-			// Filters the price string to include the sign up fee and/or trial to pass per scheme option on the 'wcsatt_get_single_product_price_string' filter.
-			add_filter( 'wcsatt_get_single_product_price_string', array( $this, 'get_price_string' ), 10, 2 );
+			// Filters the price string to include the sign up fee and/or trial to pass per scheme option on the 'wcsatt_single_product_subscription_scheme_price_html' filter.
+			add_filter( 'wcsatt_single_product_subscription_scheme_price_html', array( $this, 'get_price_string' ), 10, 2 );
 
 			// Filters the lowest price string to include the sign up fee on the 'wcsatt_get_single_product_lowest_price_string' filter.
 			add_filter( 'wcsatt_get_single_product_lowest_price_string', array( $this, 'get_lowest_price_string' ), 10, 2 );
