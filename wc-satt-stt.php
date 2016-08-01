@@ -463,12 +463,6 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 
 				// If a trial length is more than zero then re-adjust the price.
 				if ( $trial_length > 0 ) {
-
-					/*$cart_item['data']->price = $new_price;
-					$cart_item['data']->subscription_price = $new_price;
-					$cart_item['data']->sale_price = $new_price;
-					$cart_item['data']->regular_price = $new_price;*/
-
 					$cart_item['data']->subscription_trial_length = $trial_length;
 					$cart_item['data']->subscription_trial_period = $trial_period;
 				} else {
