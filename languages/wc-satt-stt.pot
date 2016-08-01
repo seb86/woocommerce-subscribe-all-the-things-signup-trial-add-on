@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WooCommerce Subscribe to All the Things - Sign up and "
 "Trial Addon\n"
-"POT-Creation-Date: 2016-07-14 15:56+0200\n"
+"POT-Creation-Date: 2016-08-01 12:33+0200\n"
 "PO-Revision-Date: 2016-06-13 06:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -76,7 +76,7 @@ msgid ""
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "WooCommerce Subscribe to All the Things - Sign up and Trial Addon"
+msgid "WooCommerce Subscribe All the Things - Sign up and Trial Addon"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -88,7 +88,7 @@ msgstr ""
 #. Description of the plugin/theme
 msgid ""
 "Add a sign up fee and free trial for each subscription scheme. Requires "
-"WooCommerce Subscribe to All the Things extension v1.1.1+."
+"WooCommerce Subscribe All the Things extension v1.1.0+."
 msgstr ""
 
 #. Author of the plugin/theme
