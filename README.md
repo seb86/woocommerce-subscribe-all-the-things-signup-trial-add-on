@@ -1,4 +1,4 @@
-### WooCommerce Subscribe All the Things - Sign-up and Trial Add-on
+## WooCommerce Subscribe All the Things - Sign-up and Trial Add-on
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/badges/build.png?b=master)](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/build-status/master)
 
