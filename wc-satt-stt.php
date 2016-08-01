@@ -1,9 +1,9 @@
 <?php
 /*
- * Plugin Name: WooCommerce Subscribe to All the Things - Sign up and Trial Addon
+ * Plugin Name: WooCommerce Subscribe All the Things - Sign up and Trial Addon
  * Plugin URI:  https://github.com/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on
  * Version:     1.0.0 Beta
- * Description: Add a sign up fee and free trial for each subscription scheme. Requires WooCommerce Subscribe to All the Things extension v1.1.1+.
+ * Description: Add a sign up fee and free trial for each subscription scheme. Requires WooCommerce Subscribe All the Things extension v1.1.0+.
  * Author:      Sébastien Dumont
  * Author URI:  https://sebastiendumont.com
  *
@@ -29,7 +29,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		const REQ_WC_VERSION = '2.3.0';
 
 		/* Required WCSATT version */
-		const REQ_WCSATT_VERSION = '1.1.1';
+		const REQ_WCSATT_VERSION = '1.1.0';
 
 		/* Text domain. */
 		const TEXT_DOMAIN = 'wc-satt-stt';
@@ -119,12 +119,12 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		} // END wcsatt_stt_wc_admin_notice()
 
 		/**
-		 * Display a warning message if minimum version of WooCommerce Subscribe to All the Things check fails.
+		 * Display a warning message if minimum version of WooCommerce Subscribe All the Things check fails.
 		 *
 		 * @return void
 		 */
 		public function wcsatt_stt_admin_notice() {
-			echo '<div class="error"><p>' . sprintf( __( '%1$s requires at least %2$s v%3$s in order to function. Please upgrade %2$s.', 'wc-satt-stt' ), 'Sign up and Trial Options Add-on', 'WooCommerce Subscribe to All the Things', self::REQ_WCSATT_VERSION ) . '</p></div>';
+			echo '<div class="error"><p>' . sprintf( __( '%1$s requires at least %2$s v%3$s in order to function. Please upgrade %2$s.', 'wc-satt-stt' ), 'WooCommerce Subscribe All the Things - Sign up and Trial Add-on', 'WooCommerce Subscribe All the Things', self::REQ_WCSATT_VERSION ) . '</p></div>';
 		} // END wcsatt_stt_admin_notice()
 
 		/**
