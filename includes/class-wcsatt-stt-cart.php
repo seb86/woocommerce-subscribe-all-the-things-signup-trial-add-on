@@ -38,8 +38,8 @@ class WCSATT_STT_Cart extends WCS_ATT_Cart {
 			// Subscription Price
 			$price = $cart_item['data']->subscription_price;
 
-			// Is there a sign up fee?
-			$sign_up_fee = isset( $subscription_prices['sign_up_fee'] ) ? $subscription_prices['sign_up_fee'] : '';
+			// This isn't a child item and there is a sign up fee?
+			$sign_up_fee = !isset($cart_item['data']->parent) && isset( $subscription_prices['sign_up_fee'] ) ? $subscription_prices['sign_up_fee'] : '';
 
 			// Put both the subscription price and the sign-up fee together.
 			$new_price = $price + $sign_up_fee;
