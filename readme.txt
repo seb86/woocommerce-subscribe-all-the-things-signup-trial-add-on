@@ -1,4 +1,4 @@
-=== WooCommerce Subscribe All the Things - Sign up and Trial Add-on ===
+=== WooCommerce Subscribe All the Things:- Sign-up and Trial Addon ===
 
 Contributors: sebd86
 Tags: woocommerce, subscriptions, subscribe, order, cart, product, convert, product type, variable, variations, bundle, composite, mix, match, extension, add-on, signup, trial
@@ -11,11 +11,11 @@ WC tested up to: 2.5.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Allows you to add a sign up and free trial to your subscription options to existing WooCommerce products.
+Allows you to add a sign-up fee and free trial to your subscription scheme options to existing WooCommerce products.
 
 == Description ==
 
-This plugin allows you to add a sign up fee and free trial for each subscription scheme.
+This plugin allows you to add a sign-up fee and free trial for each subscription scheme.
 
 WooCommerce Subscribe All the Things is a mini-extension for [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions/) that provides experimental subscriptions support for non-subscription product types. It allows you to attach subscriptions to Simple products, Variable products, [Composite Products](http://www.woothemes.com/products/composite-products/), [Product Bundles](http://www.woothemes.com/products/product-bundles/) and [Mix and Match Products](http://www.woothemes.com/products/woocommerce-mix-and-match-products/).
 
