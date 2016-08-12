@@ -42,7 +42,7 @@ class WCSATT_STT_Cart extends WCS_ATT_Cart {
 			$sign_up_fee = isset( $subscription_prices['sign_up_fee'] ) ? $subscription_prices['sign_up_fee'] : '';
 
 			// Put both the subscription price and the sign-up fee together.
-			$new_price = $price + $sign_up_fee;
+			$new_price = round( $price + $sign_up_fee, wc_get_price_decimals() );
 
 			if ( $sign_up_fee > 0 ) {
 				$cart_item['data']->initial_amount = $new_price;
