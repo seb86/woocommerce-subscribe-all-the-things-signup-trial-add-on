@@ -4,7 +4,7 @@
 
 This is an addon extension for [WooCommerce Subscribe All the Things](https://github.com/Prospress/woocommerce-subscribe-all-the-things) currently in development.
 
-> Please note: This extension is still being tested as WooCommerce Subscribe All the Things is still in development.
+> Please note: While this extension may be ready to use publically, WooCommerce Subscribe All the Things is still in beta and may change.
 
 The goal of the extension is to provide additional subscription options, allowing you to add a sign-up fee and/or a free trial to the subscription options.
 
@@ -23,8 +23,6 @@ In order to use the extension, you will need:
 * WooCommerce 2.3 or newer.
 * WooCommerce Subscriptions v2.0 or newer.
 * WooCommerce Subscribe All the Things v1.1.0 or newer.
-* A staging or test site, I do not recommend using this on live sites yet.
-* A sense of adventure as the codebase is still beta.
 
 ### Installation
 
