@@ -5,7 +5,7 @@ Tags: woocommerce, subscriptions, subscribe, order, cart, product, convert, prod
 Donate Link: https://www.paypal.me/CodeBreaker
 Requires at least: 3.8
 Tested up to: 4.5.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 WC requires at least: 2.3
 WC tested up to: 2.5.5
 License: GNU General Public License v3.0

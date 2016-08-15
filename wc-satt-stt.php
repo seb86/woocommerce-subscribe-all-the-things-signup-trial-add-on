@@ -2,7 +2,7 @@
 /*
  * Plugin Name: WooCommerce Subscribe All the Things: Sign-up and Trial Add-on
  * Plugin URI:  https://github.com/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on
- * Version:     1.0.0
+ * Version:     1.0.1
  * Description: Adds a sign-up fee and free trial option for each subscription scheme. Requires WooCommerce Subscribe All the Things extension v1.1.0+.
  * Author:      Sébastien Dumont
  * Author URI:  https://sebastiendumont.com
@@ -23,7 +23,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 	class WCSATT_STT {
 
 		/* Plugin version. */
-		const VERSION = '1.0.0';
+		const VERSION = '1.0.1';
 
 		/* Required WC version. */
 		const REQ_WC_VERSION = '2.3.0';
