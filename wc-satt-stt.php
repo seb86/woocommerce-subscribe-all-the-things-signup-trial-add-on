@@ -80,7 +80,7 @@ if ( ! class_exists( 'WCSATT_STT' ) ) {
 		 * Load the plugin.
 		 */
 		public function __construct() {
-			add_action( 'plugins_loaded', array( $this, 'load_plugin' ) );
+			add_action( 'plugins_loaded', array( $this, 'load_plugin' ), 11 );
 			add_action( 'init', array( $this, 'init_plugin' ) );
 			add_filter( 'plugin_row_meta', array( $this, 'plugin_meta_links' ), 10, 4 );
 		}
