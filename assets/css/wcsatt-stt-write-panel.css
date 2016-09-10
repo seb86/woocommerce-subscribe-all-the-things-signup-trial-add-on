@@ -1,0 +1,8 @@
+#wcsatt_data .subscription_scheme_product_data.sign_up_trial_scheme label {
+  margin-right: 0;
+  width: 132px;
+}
+
+#wcsatt_data .subscription_scheme_product_data.sign_up_trial_scheme .subscription_trial p.form-field {
+  width: auto !important;
+}

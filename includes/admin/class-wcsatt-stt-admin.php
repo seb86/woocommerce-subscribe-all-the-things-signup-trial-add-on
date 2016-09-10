@@ -15,6 +15,9 @@ class WCSATT_STT_Admin extends WCS_ATT_Admin {
 	 * @static
 	 */
 	public static function init() {
+		// Admin scripts and styles.
+		add_action( 'admin_enqueue_scripts', __CLASS__ . '::admin_style' );
+
 		// Adds to the default values for subscriptions schemes content.
 		add_filter( 'wcsatt_default_subscription_scheme', __CLASS__ . '::subscription_schemes_content', 10, 1 );
 
@@ -24,6 +27,23 @@ class WCSATT_STT_Admin extends WCS_ATT_Admin {
 		// Filter the subscription scheme data to process the sign up and trial options on the ''wcsatt_subscription_scheme_process_scheme_data' filter.
 		add_filter( 'wcsatt_subscription_scheme_process_scheme_data', __CLASS__ . '::wcsatt_stt_process_scheme_data', 10, 2 );
 	}
+
+	/**
+	 * Load style.
+	 *
+	 * @return void
+	 */
+	public static function admin_style() {
+		// Get admin screen id.
+		$screen    = get_current_screen();
+		$screen_id = $screen ? $screen->id : '';
+
+		if ( in_array( $screen_id, array( 'edit-product', 'product' ) ) ) {
+			wp_register_style( 'wcsatt_stt_writepanel', WCSATT_STT::plugin_url() . '/assets/css/wcsatt-stt-write-panel.css', array( 'woocommerce_admin_styles' ), WCSATT_STT::VERSION );
+			wp_enqueue_style( 'wcsatt_stt_writepanel' );
+		}
+
+	} // END admin_style()
 
 	/**
 	 * Adds the default values for subscriptions schemes content.
@@ -64,6 +84,8 @@ class WCSATT_STT_Admin extends WCS_ATT_Admin {
 			$subscription_trial_period = '';
 		}
 
+		echo '<div class="options_group subscription_scheme_product_data sign_up_trial_scheme">';
+
 		// Sign-up Fee
 		woocommerce_wp_text_input( array(
 			'id'          => '_subscription_sign_up_fee',
@@ -81,6 +103,8 @@ class WCSATT_STT_Admin extends WCS_ATT_Admin {
 			'name'        => 'wcsatt_schemes[' . $index . '][subscription_sign_up_fee]',
 			'value'       => $subscription_sign_up_fee
 		) );
+
+		echo '<div class="subscription_trial">';
 
 		// Trial Length
 		woocommerce_wp_text_input( array(
@@ -104,6 +128,10 @@ class WCSATT_STT_Admin extends WCS_ATT_Admin {
 			'name'        => 'wcsatt_schemes[' . $index . '][subscription_trial_period]',
 			'value'       => $subscription_trial_period
 	) );
+
+		echo '</div>';
+
+		echo '</div>';
 	} // END wcsatt_stt_fields()
 
 	/**
