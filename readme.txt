@@ -1,13 +1,14 @@
-=== WooCommerce Subscribe All the Things:- Sign-up and Trial Addon ===
+=== WooCommerce Subscribe All the Things:- Sign-up and Trial Add-on ===
 
 Contributors: sebd86
 Tags: woocommerce, subscriptions, subscribe, order, cart, product, convert, product type, variable, variations, bundle, composite, mix, match, extension, add-on, signup, trial
 Donate Link: https://www.paypal.me/CodeBreaker
-Requires at least: 3.8
-Tested up to: 4.5.3
-Stable tag: 1.0.1
-WC requires at least: 2.3
-WC tested up to: 2.5.5
+Stable tag: 2.0.0
+Requires at least: 4.5
+Tested up to: 4.9.4
+Requires PHP: 5.6
+WC requires at least: 3.0.0
+WC tested up to: 3.3.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,8 +22,8 @@ WooCommerce Subscribe All the Things is a mini-extension for [WooCommerce Subscr
 
 = Requirments =
  * [WooCommerce](https://woocommerce.com/) 2.3 or newer.
- * [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions/) v2.0+
- * [WooCommerce Subscribe All the Things](https://github.com/Prospress/woocommerce-subscribe-all-the-things) v1.1.0+
+ * [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions/) v2.1+
+ * [WooCommerce Subscribe All the Things](https://github.com/Prospress/woocommerce-subscribe-all-the-things) v2.0+
 
 == Installation ==
 
@@ -34,7 +35,7 @@ WooCommerce Subscribe All the Things is a mini-extension for [WooCommerce Subscr
 
 = Usage =
 
-Once you have this addon activated you can now add a sign-up fee and/or a free trial to the subscription option of your choosing.
+Once you have this add-on activated you can now add a sign-up fee and/or a free trial to the subscription option of your choosing.
 
 To offer this to your customers:
 
@@ -71,4 +72,8 @@ This project was backed by [Subscription Group Limited](http://www.subscriptiong
 2. Product Meta Data
 
 == Changelog ==
-1.0.0 - Initial Version
+= v1.0.1 - 15th August 2016 =
+* Corrected the loading order of the plugin.
+
+= v1.0.0 - 12th August 2016 =
+* Initial Version

@@ -2,11 +2,11 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/badges/build.png?b=master)](https://scrutinizer-ci.com/g/seb86/woocommerce-subscribe-to-all-the-things-signup-trial-add-on/build-status/master)
 
-This is an addon extension for [WooCommerce Subscribe All the Things](https://github.com/Prospress/woocommerce-subscribe-all-the-things) currently in development.
+This is an add-on extension for [WooCommerce Subscribe All the Things](https://github.com/Prospress/woocommerce-subscribe-all-the-things) currently in development.
 
-> Please note: While this extension may be ready to use publically, WooCommerce Subscribe All the Things is still in beta and may change.
+> Please note: While this extension may be ready to use publicly, WooCommerce Subscribe All the Things is still in beta and may change.
 
-The goal of the extension is to provide additional subscription options, allowing you to add a sign-up fee and/or a free trial to the subscription options.
+The goal of the extension is to provide additional subscription options, allowing you to add a sign-up fee and/or a free trial to each subscription scheme.
 
 This works with all supported product types in WooCommerce Subscribe All the Things.
 
@@ -20,9 +20,9 @@ This works with all supported product types in WooCommerce Subscribe All the Thi
 
 In order to use the extension, you will need:
 
-* WooCommerce 2.3 or newer.
-* WooCommerce Subscriptions v2.0 or newer.
-* WooCommerce Subscribe All the Things v1.1.0 or newer.
+* WooCommerce 3.0 or newer.
+* WooCommerce Subscriptions v2.1 or newer.
+* WooCommerce Subscribe All the Things v2.0 or newer.
 
 ### Installation
 
@@ -34,7 +34,7 @@ In order to use the extension, you will need:
 
 #### Usage
 
-Once you have this addon activated you can now add a sign-up fee and/or a free trial to the subscription option of your choosing.
+Once you have this add-on activated you can now add a sign-up fee and/or a free trial to the subscription option of your choosing.
 
 To offer this to your customers:
 
@@ -52,16 +52,6 @@ Enjoy! :)
 Support is only given to those who provide me a [donation](https://www.paypal.me/CodeBreaker) to help me keep the plugin maintained. [Donations](https://www.paypal.me/CodeBreaker) are done via PayPal. Once you have provided a donation, send me an email.
 
 > Please only send donations either in USD (American Dollars) or EUR (Euros). Thank you.
-
----
-
-### Changelog
-
-**v1.0.1**
-* Corrected the loading order of the plugin.
-
-**v1.0.0**
-* Initial version.
 
 ---
 
